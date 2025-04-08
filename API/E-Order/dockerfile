@@ -1,0 +1,12 @@
+FROM microsoft/dotnet:sdk
+WORKDIR /e-order
+EXPOSE 80
+
+COPY ./API/E-Order .
+COPY ././Domain-Core /Domain-Core
+
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
+# RUN if [ ! -d "Migrations" ] ; then dotnet ef migrations add InitialMigration ; else echo "Migrations folder exits." ; fi
+
+ENTRYPOINT ["dotnet", "out/e-order.dll"]

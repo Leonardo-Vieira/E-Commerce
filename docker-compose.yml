@@ -1,0 +1,132 @@
+version: "3"
+
+services:
+  # client.api:
+  #   container_name: client.api
+  #   build:
+  #     context: .
+  #     dockerfile: ./API/E-Client/dockerfile
+  #   ports:
+  #     - "5000:80"
+  #   depends_on:
+  #     - activemq
+  #     - dbClient
+  #   networks:
+  #     static-network:
+  #       ipv4_address: 172.20.128.3
+  #   restart: on-failure
+
+  # order.api:
+  #   container_name: order.api
+  #   build:
+  #     context: .
+  #     dockerfile: ./API/E-Order/dockerfile
+  #   ports:
+  #     - "5001:80"
+  #   depends_on:
+  #     - activemq
+  #     - dbOrder
+  #   networks:
+  #     static-network:
+  #       ipv4_address: 172.20.128.4
+  #   restart: on-failure
+
+  product.api:
+    container_name: product.api
+    build:
+      context: .
+      dockerfile: ./API/E-Product/dockerfile
+    ports:
+      - "5002:80"
+    depends_on:
+      - activemq
+      - dbProduct
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.5
+    restart: on-failure
+
+  authentication:
+    container_name: authentication
+    build:
+      context: .
+      dockerfile: ./API/Authentication/dockerfile
+    ports:
+      - "5003:5003"
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.6
+    restart: on-failure
+
+  activemq:
+    image: rmohr/activemq:5.15.6
+    container_name: activemq
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.2
+    ports:
+      - 61616:61616
+      - 8161:8161
+
+  # dbOrder:
+  #   container_name: 'dbOrder'
+  #   image: postgres
+  #   restart: on-failure
+  #   ports:
+  #     - "5432"
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: egapi
+  #   networks:
+  #     static-network:
+  #   volumes:
+  #     - ./dumps/order:/docker-entrypoint-initdb.d/
+
+  # dbClient:
+  #   container_name: 'dbClient'
+  #   image: postgres
+  #   restart: on-failure
+  #   ports:
+  #     - "5432"
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: egapi
+  #   networks:
+  #     static-network:
+  #   volumes:
+  #     - ./dumps/client:/docker-entrypoint-initdb.d/
+  
+  dbProduct:
+    container_name: 'dbProduct'
+    image: postgres
+    restart: on-failure
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: egapi
+    networks:
+      static-network:
+    volumes:
+      - ./dumps/product:/docker-entrypoint-initdb.d/
+
+  dbESProduct:
+    container_name: 'dbESroduct'
+    image: postgres
+    restart: on-failure
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: egapi
+    networks:
+      static-network:
+    volumes:
+      - ./dumps/product/eventStore:/docker-entrypoint-initdb.d/
+
+networks:
+  static-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

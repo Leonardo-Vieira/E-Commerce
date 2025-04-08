@@ -1,0 +1,11 @@
+FROM microsoft/dotnet:sdk
+WORKDIR /e-product
+EXPOSE 80
+
+COPY ./API/E-Product .
+COPY ././Domain-Core /Domain-Core
+
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
+
+ENTRYPOINT ["dotnet", "out/e-product.dll"]

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>E_Product</RootNamespace>
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.App"/>
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.0"/>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0"/>
+    <PackageReference Include="MediatR" Version="4.1.0"/>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0"/>
+    <PackageReference Include="Apache.NMS.ActiveMQ" Version="1.7.2"/>
+    <PackageReference Include="RestSharp.Newtonsoft.Json.NetCore" Version="1.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1"/>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1"/>
+    <PackageReference Include="AutoMapper" Version="8.0.0"/>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0"/>
+    <PackageReference Include="Dapper" Version="1.50.7"/>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.109"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain-Core\Domain-Core.csproj"/>
+  </ItemGroup>
+</Project>

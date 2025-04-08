@@ -1,0 +1,10 @@
+FROM microsoft/dotnet:sdk
+WORKDIR /authentication
+EXPOSE 80
+
+COPY ./API/Authentication .
+
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
+
+ENTRYPOINT ["dotnet", "out/Authentication.dll"]

@@ -1,0 +1,6 @@
+@import '~@angular/material/theming';
+
+$primary: mat-color($mat-orange, "A200");
+$accent: mat-color($mat-cyan, "A200");
+$warn: mat-color($mat-deep-orange, "A400");
+$white: #FFFFFF;

@@ -1,0 +1,16 @@
+using System;
+using Domain_Core.Events;
+
+namespace e_order.Domain.IntegrationEvents.Brand
+{
+    public class BrandRemovedIntegrationEvent : IntegrationEvent
+    {
+        public BrandRemovedIntegrationEvent(Guid id)
+        {
+            Id = id;
+            AggregateId = id;
+        }
+
+        public Guid Id { get; set; }
+    }
+}
